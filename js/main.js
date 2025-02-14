@@ -11,19 +11,18 @@ const pokemonListGuille = [
     "tinkatink", "charmeleon", "eevee", "magikarp",  "haunter", "gengar", "riolu", "haxorus", "metang", "makuhita",
     "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour", "feebas",
     "budew", "roselia", "charjabug", "thievul", "nacli", "garganacl", 
-    
 ];
 
 const pokemonListTinn = [
-    "flapple", "appletun", "hydrapple", "sharpedo", "roselia", "Budew", "stufful", "deerling", "thwackey",  "drakloak", "dragapult", "gliscor",
+    "flapple", "appletun", "hydrapple", "sharpedo", "roselia", "budew", "stufful", "deerling", "thwackey",  "drakloak", "dragapult", "gliscor",
     "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
-    , "chandelure", "simisear", "skeledirge", "honchkrow", "joltik", "grotle",
+    "chandelure", "simisear", "skeledirge", "honchkrow", "joltik", "grotle",
     "torterra", "amoonguss", "rowlet", "decidueye", "cascoon", "beautifly", "dottler", "gogoat"
 ];
 
 // Función para buscar el ID de un Pokémon
 async function buscarId(nombre) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre.toLowerCase()}`); // Convertimos a minúsculas para evitar errores
     const data = await response.json();
     return data.id;
 }
@@ -36,38 +35,42 @@ async function renderizarPokemonList(lista) {
     actualizarContador(); // Actualizar la UI con los valores actuales
 
     for (const pokemon of lista) {
-        const id = await buscarId(pokemon);
-        const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+        try {
+            const id = await buscarId(pokemon);
+            const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
-        const item = document.createElement("div");
-        item.classList.add("pokemon-item");
+            const item = document.createElement("div");
+            item.classList.add("pokemon-item");
 
-        const img = document.createElement("img");
-        img.src = imgUrl;
-        img.alt = pokemon;
+            const img = document.createElement("img");
+            img.src = imgUrl;
+            img.alt = pokemon;
 
-        const name = document.createElement("span");
-        name.textContent = pokemon;
+            const name = document.createElement("span");
+            name.textContent = pokemon;
 
-        const form = document.createElement("form");
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+            const form = document.createElement("form");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
 
-        // Evento para actualizar contador cuando se selecciona un Pokémon
-        checkbox.addEventListener("change", () => {
-            if (checkbox.checked) {
-                totalSeleccionados++;
-            } else {
-                totalSeleccionados--;
-            }
-            actualizarContador();
-        });
+            // Evento para actualizar contador cuando se selecciona un Pokémon
+            checkbox.addEventListener("change", () => {
+                if (checkbox.checked) {
+                    totalSeleccionados++;
+                } else {
+                    totalSeleccionados--;
+                }
+                actualizarContador();
+            });
 
-        form.appendChild(checkbox);
-        item.appendChild(img);
-        item.appendChild(name);
-        item.appendChild(form);
-        container.appendChild(item);
+            form.appendChild(checkbox);
+            item.appendChild(img);
+            item.appendChild(name);
+            item.appendChild(form);
+            container.appendChild(item);
+        } catch (error) {
+            console.error(`Error obteniendo datos de ${pokemon}:`, error);
+        }
     }
 }
 
@@ -77,10 +80,14 @@ function actualizarContador() {
     totalCartas.textContent = `Total de Cartas: ${totalPokemones}`;
 }
 
-
 // Event listeners para los botones del navbar
-guilleBtn.addEventListener("click", () => renderizarPokemonList(pokemonListGuille));
-tinnBtn.addEventListener("click", () => renderizarPokemonList(pokemonListTinn));
+guilleBtn.addEventListener("click", () => {
+    renderizarPokemonList(pokemonListGuille);
+});
+
+tinnBtn.addEventListener("click", () => {
+    renderizarPokemonList(pokemonListTinn);
+});
 
 // Renderizar la lista de Guille por defecto al cargar la página
 renderizarPokemonList(pokemonListGuille);
