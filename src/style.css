@@ -76,13 +76,22 @@ h1 {
     background-color: #e0a800;
 }
 
+
 /* Estilos para el navbar */
 nav {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px; 
 }
+
+#titulo-principal {
+    font-size: 1.8rem;
+    color: #e0a800;
+    padding: 0px 40px;
+}
+
 
 nav button {
     padding: 10px 20px;
@@ -94,6 +103,16 @@ nav button {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+}
+
+.contador {
+    padding: 10px ;
+    background-color: #ffcb05; /* Amarillo Pokémon */
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    font-size: 0.6rem;
+    border-top: 20px;
 }
 
 nav button:hover {
