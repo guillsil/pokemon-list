@@ -8,14 +8,14 @@ let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "tinkatink", "charmeleon", "eevee", "haunter", "gengar", "riolu", "metang",
+    "tinkatink", "charmeleon", "eevee", "magikarp",  "haunter", "gengar", "riolu", "haxorus", "metang", "makuhita",
     "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour", "feebas",
-    "budew", "roselia", "charjabug", "nacli",
-    "lycanroc", "thievul", "marill"
+    "budew", "roselia", "charjabug", "thievul", "nacli", "garganacl", 
+    
 ];
 
 const pokemonListTinn = [
-    "flapple", "appletun", "hydrapple", "sharpedo", "drakloak", "dragapult", "gliscor",
+    "flapple", "appletun", "hydrapple", "sharpedo", "roselia", "Budew", "stufful", "deerling", "thwackey",  "drakloak", "dragapult", "gliscor",
     "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
     , "chandelure", "simisear", "skeledirge", "honchkrow", "joltik", "grotle",
     "torterra", "amoonguss", "rowlet", "decidueye", "cascoon", "beautifly", "dottler", "gogoat"
