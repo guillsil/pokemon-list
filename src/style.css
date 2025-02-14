@@ -14,6 +14,7 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 2.5rem;
     margin-bottom: 20px;
+    padding: 0px 20px;
 }
 
 #pokemon-list {
@@ -89,7 +90,7 @@ nav {
 #titulo-principal {
     font-size: 1.8rem;
     color: #e0a800;
-    padding: 0px 40px;
+    
 }
 
 
@@ -112,8 +113,8 @@ nav button {
     border: none;
     border-radius: 5px;
     color: #333;
-    font-size: 0.6rem;
-    border-top: 20px;
+    font-size: 0.9rem;
+    border-top: 30px;
 }
 
 nav button:hover {
