@@ -18,9 +18,8 @@ h1 {
 }
 
 #pokemon-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(150px, 1fr)); /* Se ajusta automáticamente */
     gap: 20px;
     max-width: 1200px;
     padding: 20px;
@@ -209,4 +208,11 @@ form textarea:disabled,
 form select:disabled {
     background-color: #f4f4f4;
     cursor: not-allowed;
+}
+
+/* Media Query para celulares (máx 600px) */
+@media (max-width: 600px) {
+    #pokemon-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en dispositivos pequeños */
+    }
 }
