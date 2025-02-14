@@ -106,7 +106,8 @@ nav button {
 }
 
 .contador {
-    padding: 10px ;
+    width: 100%;
+    padding: 10px 10px;
     margin-top: 10px;
     background-color: #ffcb05; /* Amarillo Pokémon */
     border: none;
