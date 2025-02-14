@@ -9,7 +9,7 @@ let totalPokemones = 0;
 
 const pokemonListGuille = [
     "tinkatink", "charmeleon", "eevee", "magikarp",  "haunter", "gengar", "riolu", "haxorus", "metang", "makuhita",
-    "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour", "feebas",
+    "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour",
     "budew", "roselia", "charjabug", "thievul", "nacli", "garganacl", 
 ];
 
