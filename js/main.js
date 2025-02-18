@@ -8,16 +8,16 @@ let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "tinkatink", "charmeleon", "eevee", "magikarp",  "haunter", "gengar", "riolu", "haxorus", "metang", "makuhita",
+    "charmeleon", "eevee", "gengar", "riolu", "metang", "makuhita", "weedle", "beedrill", "magneton", "magnezone", "persian",
     "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour",
-    "budew", "roselia", "charjabug", "thievul", "nacli", "garganacl", 
+    "budew", "charjabug", "nacli", "hydreigon", "gimmighoul"
 ];
 
 const pokemonListTinn = [
-    "flapple", "appletun", "hydrapple", "sharpedo", "roselia", "budew", "stufful", "deerling", "thwackey",  "drakloak", "dragapult", "gliscor",
+    "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
     "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
-    "chandelure", "simisear", "skeledirge", "honchkrow", "joltik", "grotle",
-    "torterra", "amoonguss", "rowlet", "decidueye", "cascoon", "beautifly", "dottler", "gogoat"
+    "chandelure", "simisear", "honchkrow",  "grotle",
+    "torterra", "amoonguss", "rowlet", "beautifly", "gogoat"
 ];
 
 // Función para buscar el ID de un Pokémon
