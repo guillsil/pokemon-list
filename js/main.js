@@ -22,8 +22,7 @@ const favoritoGuille = [
 ];
 
 const favoritoTinn = [
-    "lucario", "toxtricity", "decidueye", "primarina", "cinderace", "corviknight", "dragapult",
-    "zeraora", "rayquaza", "giratina", "infernape", "sableye", "darkrai", "luxray"
+    "squirtle", "wartortle", "snivy","servine", "serperior", "tornadus", "dratini", "dragonair", "dragonite", "mudbray","tornadus", "mudsdale", "dhelmise", "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
 ];
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
