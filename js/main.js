@@ -1,6 +1,8 @@
 const container = document.getElementById("pokemon-list");
 const guilleBtn = document.getElementById("guille-btn");
 const tinnBtn = document.getElementById("tinn-btn");
+const favGuille = document.getElementById("fav-guille");
+const favTinn = document.getElementById("fav-tinn");
 const cantidadSeleccionados = document.querySelector(".contador h3"); 
 const totalCartas = document.querySelector(".contador h4");
 
@@ -12,7 +14,17 @@ const pokemonListGuille = [
     "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour",
     "budew", "charjabug", "nacli", "hydreigon", "gimmighoul"
 ];
+const favoritoGuille = [
+    "darkrai", "palkia", "bulbasour", "ivysaur", "venusaur", "exeggcute", "exeggutor", "articuno", "squirtle", "wartortle", "blastoise",
+    "zapdos", "abra", "kadabra", "alakazam", "geodude", "graveler", "golem", "koffing", "weesing", "dratini", "dragonair", "dragonite",
+    "kangaskhan", "tauros", "aerodactyl", "celebi", "snivy", "servine", "serperior", "ponyta", "rapidash", "stonjourner", 
+    "voltorb", "electrode", "gible", "gabite", "garchomp", 
+];
 
+const favoritoTinn = [
+    "lucario", "toxtricity", "decidueye", "primarina", "cinderace", "corviknight", "dragapult",
+    "zeraora", "rayquaza", "giratina", "infernape", "sableye", "darkrai", "luxray"
+];
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
     "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
@@ -87,6 +99,14 @@ guilleBtn.addEventListener("click", () => {
 
 tinnBtn.addEventListener("click", () => {
     renderizarPokemonList(pokemonListTinn);
+});
+
+favGuille.addEventListener("click", () => {
+    renderizarPokemonList(favoritoGuille)
+});
+
+favTinn.addEventListener("click", () => {
+    renderizarPokemonList(favoritoTinn)
 });
 
 // Renderizar la lista de Guille por defecto al cargar la página
