@@ -212,7 +212,22 @@ form select:disabled {
 
 /* Media Query para celulares (máx 600px) */
 @media (max-width: 600px) {
+
+    .btn-nav {
+        display: flex;
+        flex-wrap: wrap; /* Permite que los botones se ajusten en varias líneas */
+        justify-content: center;
+        gap: 5px;
+        width: 100%;
+    }
+
+    nav button {
+        font-size: 0.8rem; /* Hacer los botones más pequeños */
+        padding: 8px 12px; /* Reducir el tamaño */
+    }
+
     #pokemon-list {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas en dispositivos pequeños */
+        grid-template-columns: repeat(2, 1fr); /* Reducir a 2 columnas */
+        gap: 10px;
     }
 }
