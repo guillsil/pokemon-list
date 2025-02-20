@@ -15,8 +15,8 @@ const pokemonListGuille = [
     "budew", "charjabug", "nacli", "hydreigon", "gimmighoul"
 ];
 const favoritoGuille = [
-    "darkrai", "palkia", "bulbasour", "ivysaur", "venusaur", "exeggcute", "exeggutor", "articuno", "squirtle", "wartortle", "blastoise",
-    "zapdos", "abra", "kadabra", "alakazam", "geodude", "graveler", "golem", "koffing", "weesing", "dratini", "dragonair", "dragonite",
+    "darkrai", "palkia", "bulbasaur", "ivysaur", "venusaur", "exeggcute", "exeggutor", "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
+     "abra", "kadabra", "alakazam", "geodude", "graveler", "golem", "koffing", "weesing", "dratini", "dragonair", "dragonite",
     "kangaskhan", "tauros", "aerodactyl", "celebi", "snivy", "servine", "serperior", "ponyta", "rapidash", "stonjourner", 
     "voltorb", "electrode", "gible", "gabite", "garchomp", 
 ];
