@@ -22,13 +22,16 @@ const favoritoGuille = [
 ];
 
 const favoritoTinn = [
-    "squirtle", "wartortle", "snivy","servine", "serperior", "tornadus", "dratini", "dragonair", "dragonite", "mudbray","tornadus", "mudsdale", "dhelmise", "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
+    "squirtle", "wartortle", "snivy","servine", "serperior", "tornadus", ,"tornadus", "mudsdale", 
+    "dhelmise", "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
 ];
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
     "pidgeotto", "pidgeot", "talonflame90", "sealeo", "walrein", "braixen", "delphox",
     "chandelure", "simisear", "honchkrow",  "grotle",
-    "torterra", "amoonguss", "rowlet", "beautifly", "gogoat"
+    "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
+    "vileplume", "bellossom", "smoliv", "dolliv", "arboliva", "charmeleon", "charizard", "wiglett", "toxel", "greavard", "bunnelby", "dragonair", "dragonite",
+    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold"
 ];
 
 // Función para buscar el ID de un Pokémon
