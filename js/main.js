@@ -10,14 +10,14 @@ let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "charmeleon", "eevee", "gengar", "riolu", "metang", "makuhita", "weedle", "beedrill", "magneton", "magnezone", "persian",
-    "weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel", "panpour",
-    "budew", "charjabug", "nacli", "hydreigon", "gimmighoul"
+    "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar", "riolu", "metang", "trevenant", 
+    "lileep", "seadra", "kingdra", "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel",
+    "panpour","budew", "charjabug", "nacli", "hydreigon", "gimmighoul", "exeggutor", "greavard", "polteageist", "steelix",
+    "revavroom", "zubat", "golbat"
 ];
 const favoritoGuille = [
-    "darkrai", "palkia", "bulbasaur", "ivysaur", "venusaur", "exeggcute", "exeggutor", "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
-     "abra", "kadabra", "alakazam", "geodude", "graveler", "golem", "koffing", "weezing", "dratini", "dragonair", "dragonite",
-    "kangaskhan", "tauros", "aerodactyl", "celebi", "snivy", "servine", "serperior", "ponyta", "rapidash", "stonjourner", 
+    "darkrai", "palkia", "bulbasaur", "ivysaur", "venusaur", , "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
+     "geodude", "graveler", "golem", "koffing", "weezing", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner", 
     "voltorb", "electrode", "gible", "gabite", "garchomp", 
 ];
 
@@ -26,7 +26,7 @@ const favoritoTinn = [
 ];
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
-    "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
+    "pidgeotto", "pidgeot", "talonflame90", "sealeo", "walrein", "braixen", "delphox",
     "chandelure", "simisear", "honchkrow",  "grotle",
     "torterra", "amoonguss", "rowlet", "beautifly", "gogoat"
 ];
