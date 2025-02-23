@@ -117,38 +117,6 @@ async function renderizarPokemonList(lista) {
     }
 }
 
-// Función para actualizar el contador en la pantalla
-function actualizarContador() {
-    cantidadSeleccionados.textContent = `Cantidad de Pokemones Seleccionados: ${totalSeleccionados}`;
-    totalCartas.textContent = `Total de Cartas: ${totalPokemones}`;
-}
-
-function mostrarImagen(imgUrl) {
-    document.getElementById("modal-img").src = imgUrl;
-    modal.style.display = "block";
-}
-
-document.getElementById("close-modal").addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-// Event listeners para los botones del navbar
-guilleBtn.addEventListener("click", () => {
-    renderizarPokemonList(pokemonListGuille);
-});
-
-tinnBtn.addEventListener("click", () => {
-    renderizarPokemonList(pokemonListTinn);
-});
-
-favGuille.addEventListener("click", () => {
-    renderizarPokemonList(favoritoGuille)
-});
-
-favTinn.addEventListener("click", () => {
-    renderizarPokemonList(favoritoTinn)
-});
-
 function renderizarCartas(lista){
     container.innerHTML = ""; // Limpiar el contenedor antes de renderizar
     totalPokemones = 0; 
@@ -193,6 +161,38 @@ function renderizarCartas(lista){
     });
     actualizarContador();
 }
+
+// Función para actualizar el contador en la pantalla
+function actualizarContador() {
+    cantidadSeleccionados.textContent = `Cantidad de Pokemones Seleccionados: ${totalSeleccionados}`;
+    totalCartas.textContent = `Total de Cartas: ${totalPokemones}`;
+}
+
+function mostrarImagen(imgUrl) {
+    document.getElementById("modal-img").src = imgUrl;
+    modal.style.display = "block";
+}
+
+document.getElementById("close-modal").addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+// Event listeners para los botones del navbar
+guilleBtn.addEventListener("click", () => {
+    renderizarPokemonList(pokemonListGuille);
+});
+
+tinnBtn.addEventListener("click", () => {
+    renderizarPokemonList(pokemonListTinn);
+});
+
+favGuille.addEventListener("click", () => {
+    renderizarPokemonList(favoritoGuille)
+});
+
+favTinn.addEventListener("click", () => {
+    renderizarPokemonList(favoritoTinn)
+});
 
 deckGuille.addEventListener("click", async () => {
     await renderizarCartas(guilleDeck); // Asegura que se espere la ejecución
