@@ -230,4 +230,7 @@ form select:disabled {
         grid-template-columns: repeat(2, 1fr); /* Reducir a 2 columnas */
         gap: 10px;
     }
+    .pokemon-item{
+        width: 150px;
+    }
 }
