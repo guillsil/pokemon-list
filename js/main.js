@@ -7,39 +7,57 @@ const deckGuille = document.getElementById("deck-guille");
 const cantidadSeleccionados = document.querySelector(".contador h3"); 
 const totalCartas = document.querySelector(".contador h4");
 
+const modal = document.createElement("div");
+modal.id = "modal";
+modal.innerHTML = `
+    <div id="modal-content">
+        <span id="close-modal">&times;</span>
+        <img id="modal-img" src="" alt="Pokemon Image">
+    </div>
+`;
+document.body.appendChild(modal);
+
 let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "tadbulb", "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar", "riolu", "metang", "trevenant", 
-    "lileep", "seadra", "kingdra", "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel",
-    "panpour","budew", "charjabug", "nacli", "hydreigon", "gimmighoul", "exeggutor", "greavard", "polteageist", "steelix",
-    "revavroom", "zubat", "golbat"
+    "tadbulb", "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar", "riolu", "metang",
+     "kingdra", "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel",
+    "panpour", "voltorb", "budew", "charjabug", "nacli", "hydreigon", "gimmighoul", "exeggutor", "steelix", "metapod", "butterfree", 
+    "parasect", "tangrowth", "frogadier", "greninja", "wiglett", "Hihidaruma", "quagsire", "sharpedo", "masquerain",
+    "medicham"
 ];
 const favoritoGuille = [
-    "darkrai", "palkia", "bulbasaur", "ivysaur", "venusaur", , "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
-     "geodude", "graveler", "golem", "koffing", "weezing", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner", 
-    "voltorb", "electrode", "gible", "gabite", "garchomp", 
+    "darkrai", "bulbasaur", "ivysaur", "venusaur", , "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
+     "geodude", "graveler", "golem", "koffing", "weezing", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner",
+     "gible", "gabite", "garchomp", 
 ];
-const guilleDeck = [ "melmetal", "meltan", "meltan", "revavroom", "orthworm", "orthworm", "zacian", "zacian",
-    "bronzong", "bronzong", "bronzor", "bronzor"
+
+const guilleDeck = [
+    "1x zacian", "2x bronzong", "1x bronzor", ,"2x Roark", "1x Jacq", 
+    "1x Rika", "4xGreat Ball", "2x Energy Sticker",
+    "2x Nest Ball", "11x Basic Metal Energy"
 ];
-const guillePartidirias = [
-    "3x Nemona", "3x Roark", "2x Youngster", "1x Jacq", 
-    "1x Rika", "4xGreat Ball", "3x Switch", "2x Energy Sticker",
-    "2x Nest Ball", "1 Position", "19x Basic Metal Energy"
-];
-const favoritoTinn = [
-    "squirtle", "wartortle", "snivy","servine", "serperior", "tornadus", ,"tornadus", "mudsdale", 
-    "dhelmise", "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
-];
+
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
     "pidgeotto", "pidgeot", "talonflame90", "sealeo", "walrein", "braixen", "delphox",
-    "chandelure", "simisear", "honchkrow",  "grotle",
+    "chandelure", "simisear",  "grotle",
     "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
-    "vileplume", "bellossom", "smoliv", "dolliv", "arboliva", "charmeleon", "charizard", "wiglett", "toxel", "greavard", "bunnelby", "dragonair", "dragonite",
-    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold"
+    "vileplume", "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "toxel", "bunnelby", "dragonair", "dragonite",
+    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold", "scizor", "scovillain", "armarouge",
+    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon"
+];
+
+const favoritoTinn = [
+    "squirtle", "wartortle", "snivy","servine", "serperior", "mudsdale", 
+    "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
+];
+
+const tinnDeck = [
+    "1x zacian", "2x bronzong", "1x bronzor", ,"2x Roark", "1x Jacq", 
+    "1x Rika", "4xGreat Ball", "2x Energy Sticker",
+    "2x Nest Ball", "11x Basic Metal Energy"
 ];
 
 // Función para buscar el ID de un Pokémon
@@ -67,6 +85,7 @@ async function renderizarPokemonList(lista) {
             const img = document.createElement("img");
             img.src = imgUrl;
             img.alt = pokemon;
+            img.addEventListener("click", () => mostrarImagen(imgUrl));
 
             const name = document.createElement("span");
             name.textContent = pokemon;
@@ -102,6 +121,15 @@ function actualizarContador() {
     totalCartas.textContent = `Total de Cartas: ${totalPokemones}`;
 }
 
+function mostrarImagen(imgUrl) {
+    document.getElementById("modal-img").src = imgUrl;
+    modal.style.display = "block";
+}
+
+document.getElementById("close-modal").addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
 // Event listeners para los botones del navbar
 guilleBtn.addEventListener("click", () => {
     renderizarPokemonList(pokemonListGuille);
@@ -126,50 +154,9 @@ deckGuille.addEventListener("click", async () => {
     totalSeleccionados = 0; 
     actualizarContador();
 
-    // Renderizar Pokémon del deck
-    for (const pokemon of guilleDeck) {
-        try {
-            const id = await buscarId(pokemon);
-            const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
-            const item = document.createElement("div");
-            item.classList.add("pokemon-item");
-
-            const img = document.createElement("img");
-            img.src = imgUrl;
-            img.alt = pokemon;
-
-            const name = document.createElement("span");
-            name.textContent = pokemon;
-
-            const form = document.createElement("form");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-
-            checkbox.addEventListener("change", () => {
-                if (checkbox.checked) {
-                    totalSeleccionados++;
-                } else {
-                    totalSeleccionados--;
-                }
-                actualizarContador();
-            });
-
-            form.appendChild(checkbox);
-            item.appendChild(img);
-            item.appendChild(name);
-            item.appendChild(form);
-            container.appendChild(item);
-
-            totalPokemones++;
-        } catch (error) {
-            console.error(`Error obteniendo datos de ${pokemon}:`, error);
-        }
-    }
-
     // Renderizar cartas de entrenador
     const baseURL = "https://api.pokemontcg.io/v2/cards?q=name:";
-    const cardPromises = guillePartidirias.map(async (cardEntry) => {
+    const cardPromises = guilleDeck.map(async (cardEntry) => {
         const [count, ...nameParts] = cardEntry.split("x ");
         const name = nameParts.join("x ").trim();
         
@@ -186,6 +173,7 @@ deckGuille.addEventListener("click", async () => {
                 const img = document.createElement("img");
                 img.src = card.images.large;
                 img.alt = name;
+                img.addEventListener("click", () => mostrarImagen(img.src));
 
                 const title = document.createElement("h4");
                 title.textContent = `${count}x ${name}`;
