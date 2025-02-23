@@ -231,6 +231,15 @@ form select:disabled {
         gap: 10px;
     }
     .pokemon-item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #e0e0e0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
         width: 150px;
+        text-align: center;
     }
 }
