@@ -4,6 +4,7 @@ const tinnBtn = document.getElementById("tinn-btn");
 const favGuille = document.getElementById("fav-guille");
 const favTinn = document.getElementById("fav-tinn");
 const deckGuille = document.getElementById("deck-guille");
+const deckTinn = document.getElementById("deck-tinn");
 const cantidadSeleccionados = document.querySelector(".contador h3"); 
 const totalCartas = document.querySelector(".contador h4");
 
@@ -55,9 +56,10 @@ const favoritoTinn = [
 ];
 
 const tinnDeck = [
-    "1x zacian", "2x bronzong", "1x bronzor", ,"2x Roark", "1x Jacq", 
-    "1x Rika", "4xGreat Ball", "2x Energy Sticker",
-    "2x Nest Ball", "11x Basic Metal Energy"
+    "3x kingdra EX", "3x seadra", "3x horsea", "2x frigibax", "2x arctibax", "2x baxcalibur", 
+    "3x chien pao EX", "3x lapras", "1x geeta", "x2 boss's orders", "4x nest ball", "4x ultra ball",
+    "2x super rod", "3x rare candy", "4x superior energy retrieval", "2x cycling road", 
+    "10x basic water energy" 
 ];
 
 // Función para buscar el ID de un Pokémon
@@ -147,8 +149,7 @@ favTinn.addEventListener("click", () => {
     renderizarPokemonList(favoritoTinn)
 });
 
-// Evento para renderizar el deck de Guille con cartas adicionales
-deckGuille.addEventListener("click", async () => {
+function renderizarCartas(lista){
     container.innerHTML = ""; // Limpiar el contenedor antes de renderizar
     totalPokemones = 0; 
     totalSeleccionados = 0; 
@@ -156,7 +157,7 @@ deckGuille.addEventListener("click", async () => {
 
     // Renderizar cartas de entrenador
     const baseURL = "https://api.pokemontcg.io/v2/cards?q=name:";
-    const cardPromises = guilleDeck.map(async (cardEntry) => {
+    const cardPromises = lista.map(async (cardEntry) => {
         const [count, ...nameParts] = cardEntry.split("x ");
         const name = nameParts.join("x ").trim();
         
@@ -190,10 +191,15 @@ deckGuille.addEventListener("click", async () => {
             console.error(`Error obteniendo carta ${name}:`, error);
         }
     });
-
-    await Promise.all(cardPromises);
-
     actualizarContador();
+}
+
+deckGuille.addEventListener("click", async () => {
+    await renderizarCartas(guilleDeck); // Asegura que se espere la ejecución
+});
+
+deckTinn.addEventListener("click", async () => {
+    await renderizarCartas(tinnDeck)
 });
 
 
