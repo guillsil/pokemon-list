@@ -35,7 +35,17 @@ const favoritoGuille = [
 ];
 
 const guilleDeck = [
-    "1x (Zacian V)(Celebrations)(16)",
+    "2x (Bronzong)(Obsidian Flames)(145)",
+    "2x (Bronzor)(Obsidian Flames)(144)",
+    "2x (Energy Sticker)(151)(159)",
+    "11x (Basic Metal Energy)(Shrouded Fable)(99)",
+    "4x (Great Ball)(Paldea Evolved)(183)",
+    "2x (Nest Ball)(Sun & Moon)(123)",
+    "1x (Jacq)(Scarlet & Violet)(175)",
+
+    "1x (Rika)(Paradox-Rift)(172)",
+    "2x (Roark)(Paradox Rift)(173)",
+    "1x (Zacian)(Paradox-Rift)(136)",
     
 ];
 
@@ -72,6 +82,7 @@ const tinnDeck = [
     "2x (Cycling Road)(151)(157)",
     "4x (Nest Ball)(Paldean Fates)(84)",
     "4x (Ultra Ball)(Paldean Fates)(91))",
+    "11x (Basic Water Energy)(Paldea Evolved)(279)"
 ];
 
 // Función para buscar el ID de un Pokémon
@@ -129,38 +140,70 @@ async function renderizarPokemonList(lista) {
     }
 }
 
-function renderizarCartas(lista) {
+async function obtenerSetId(setName) {
+    try {
+        const response = await fetch("https://api.pokemontcg.io/v2/sets");
+        const data = await response.json();
+
+        const setEncontrado = data.data.find(set => set.name.toLowerCase() === setName.toLowerCase());
+        return setEncontrado ? setEncontrado.id : null;
+    } catch (error) {
+        console.error(`Error obteniendo el ID del set ${setName}:`, error);
+        return null;
+    }
+}
+
+async function renderizarCartas(lista) {
     container.innerHTML = "";
     totalPokemones = 0;
     totalSeleccionados = 0;
     actualizarContador();
 
-    const cardPromises = lista.map(async (cardEntry) => {
-        const [count, cardDetails] = cardEntry.split("x "); // Split by "x "
-        const detailsString = cardDetails.trim(); // Trim whitespace
-
-        // Regular expression for the new format
+    // Crear los elementos sin esperar la API
+    const elementosCarta = lista.map((cardEntry) => {
+        const [count, cardDetails] = cardEntry.split("x ");
+        const detailsString = cardDetails.trim();
         const regex = /\((.+?)\)\((.+?)\)\((.+?)\)/;
         const match = detailsString.match(regex);
 
         if (!match) {
             console.warn(`Formato de carta incorrecto: ${detailsString}`);
-            return; // Skip if format is invalid
+            return null;
         }
 
         const name = match[1].trim();
         const set = match[2].trim();
         const number = match[3].trim();
 
+        // Crear un contenedor de carta antes de la carga
+        const item = document.createElement("div");
+        item.classList.add("pokemon-item");
 
-        let apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${name}"`;
+        const img = document.createElement("img");
+        img.src = "loading.gif"; // Imagen temporal mientras carga
+        img.alt = name;
 
-        if (set) {
-            apiUrl += ` set.name:"${set}"`;
+        const title = document.createElement("h4");
+        title.textContent = `${count}x ${name} (${set}) ${number}`;
+
+        item.appendChild(img);
+        item.appendChild(title);
+        container.appendChild(item);
+
+        return { item, img, name, set, number };
+    });
+
+    // Ahora hacer las solicitudes fetch en paralelo
+    const cardPromises = elementosCarta.map(async ({ item, img, name, set, number }) => {
+        if (!item) return;
+
+        const setId = await obtenerSetId(set);
+        if (!setId) {
+            console.warn(`No se encontró el ID del set para: ${set}`);
+            return;
         }
-        if (number) {
-            apiUrl += ` number:"${number}"`;
-        }
+
+        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(name)}" set.id:"${setId}" number:"${number}"`;
 
         try {
             const response = await fetch(apiUrl);
@@ -168,33 +211,21 @@ function renderizarCartas(lista) {
 
             if (data?.data?.length > 0) {
                 const card = data.data[0];
-
-                const item = document.createElement("div");
-                item.classList.add("pokemon-item");
-
-                const img = document.createElement("img");
-                img.src = card.images.large;
-                img.alt = name;
-                img.addEventListener("click", () => mostrarImagen(img.src));
-
-                const title = document.createElement("h4");
-                title.textContent = `${count}x ${name} (${set}) ${number}`; // Simplified title
-
-                item.appendChild(img);
-                item.appendChild(title);
-                container.appendChild(item);
-
-                totalPokemones++;
+                img.src = card.images.large; // Reemplazar la imagen cuando se cargue
             } else {
                 console.warn(`Carta no encontrada: ${name} (${set}) ${number}`);
+                img.src = "not_found.png"; // Imagen de "no encontrado"
             }
         } catch (error) {
             console.error(`Error obteniendo carta ${name}:`, error);
+            img.src = "error.png"; // Imagen de error
         }
     });
 
+    await Promise.all(cardPromises);
     actualizarContador();
 }
+
 
 // Función para actualizar el contador en la pantalla
 function actualizarContador() {
