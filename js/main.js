@@ -43,9 +43,9 @@ const guilleDeck = [
     "2x (Nest Ball)(Sun & Moon)(123)",
     "1x (Jacq)(Scarlet & Violet)(175)",
 
-    "1x (Rika)(Paradox-Rift)(172)",
-    "2x (Roark)(Paradox-Rift)(173)",
-    "1x (Zacian)(Paradox-Rift)(136)",
+    "2x (Roark)(ParadoxRift)(173)",
+    "1x (Rika)(ParadoxRift)(172)",
+    "1x (Zacian)(ParadoxRift)(136)",
     
 ];
 
