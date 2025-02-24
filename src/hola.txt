@@ -1,0 +1,14 @@
+"2x (Bronzong)(Sword & Shield - Brilliant Stars)(81)",
+"1x (Bronzor)(Sword & Shield - Brilliant Stars)(80)",
+"2x (Roark)(Trainer Toolkit 2022)(156)", // Example with trainer card
+"1x (Jacq)(Scarlet & Violet)(169)",
+"1x (Rika)(Scarlet & Violet)(200)",
+"4x (Great Ball)(Scarlet & Violet)(192)",
+"2x (Energy Sticker)(Scarlet & Violet)(159)",
+"2x (Nest Ball)(Scarlet & Violet)(181)",
+"11x (Basic Metal Energy)(Sword & Shield)(269)"
+
+"3x kingdra EX", "3x seadra", "3x horsea", "2x frigibax", "2x arctibax", "2x baxcalibur", 
+"3x chien pao EX", "3x lapras", "1x geeta", "x2 boss's orders", "4x nest ball", "4x ultra ball",
+"2x super rod", "3x rare candy", "4x superior energy retrieval", "2x cycling road", 
+"10x basic water energy" 

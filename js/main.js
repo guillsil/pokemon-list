@@ -35,10 +35,10 @@ const favoritoGuille = [
 ];
 
 const guilleDeck = [
-    "1x zacian", "2x bronzong", "1x bronzor", ,"2x Roark", "1x Jacq", 
-    "1x Rika", "4xGreat Ball", "2x Energy Sticker",
-    "2x Nest Ball", "11x Basic Metal Energy"
+    "1x (Zacian V)(Celebrations)(16)",
+    
 ];
+
 
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
@@ -56,10 +56,22 @@ const favoritoTinn = [
 ];
 
 const tinnDeck = [
-    "3x kingdra EX", "3x seadra", "3x horsea", "2x frigibax", "2x arctibax", "2x baxcalibur", 
-    "3x chien pao EX", "3x lapras", "1x geeta", "x2 boss's orders", "4x nest ball", "4x ultra ball",
-    "2x super rod", "3x rare candy", "4x superior energy retrieval", "2x cycling road", 
-    "10x basic water energy" 
+    "3x (kingdra EX)(Shrouded Fable)(12)",
+    "3x (seadra)(Shrouded Fable)(11)",
+    "3x (horsea)(Shrouded Fable)(10)",
+    "2x (frigibax)(Paldea Evolved)(58)",
+    "2x (arctibax)(Paldea Evolved)(59)",
+    "2x (baxcalibur)(Paldea Evolved)(60)",
+    "3x (Chien-Pao ex)(Paldea Evolved)(61)",
+    "3x (Lapras)(Paldean Fates)(16)",
+    "1x (Geeta)(Obsidian Flames)(188)",
+    "2x (Boss's Orders)(Paldea Evolved)(172)",
+    "2x (Super Rod)(Paldea Evolved)(188)",
+    "3x (Rare Candy)(Paldean Fates)(89)",
+    "4x (Superior Energy Retrieval)(Paldea Evolved)(189)",
+    "2x (Cycling Road)(151)(157)",
+    "4x (Nest Ball)(Paldean Fates)(84)",
+    "4x (Ultra Ball)(Paldean Fates)(91))",
 ];
 
 // Función para buscar el ID de un Pokémon
@@ -117,22 +129,43 @@ async function renderizarPokemonList(lista) {
     }
 }
 
-function renderizarCartas(lista){
-    container.innerHTML = ""; // Limpiar el contenedor antes de renderizar
-    totalPokemones = 0; 
-    totalSeleccionados = 0; 
+function renderizarCartas(lista) {
+    container.innerHTML = "";
+    totalPokemones = 0;
+    totalSeleccionados = 0;
     actualizarContador();
 
-    // Renderizar cartas de entrenador
-    const baseURL = "https://api.pokemontcg.io/v2/cards?q=name:";
     const cardPromises = lista.map(async (cardEntry) => {
-        const [count, ...nameParts] = cardEntry.split("x ");
-        const name = nameParts.join("x ").trim();
-        
+        const [count, cardDetails] = cardEntry.split("x "); // Split by "x "
+        const detailsString = cardDetails.trim(); // Trim whitespace
+
+        // Regular expression for the new format
+        const regex = /\((.+?)\)\((.+?)\)\((.+?)\)/;
+        const match = detailsString.match(regex);
+
+        if (!match) {
+            console.warn(`Formato de carta incorrecto: ${detailsString}`);
+            return; // Skip if format is invalid
+        }
+
+        const name = match[1].trim();
+        const set = match[2].trim();
+        const number = match[3].trim();
+
+
+        let apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${name}"`;
+
+        if (set) {
+            apiUrl += ` set.name:"${set}"`;
+        }
+        if (number) {
+            apiUrl += ` number:"${number}"`;
+        }
+
         try {
-            const response = await fetch(`${baseURL}"${name}"`);
+            const response = await fetch(apiUrl);
             const data = await response.json();
-            
+
             if (data?.data?.length > 0) {
                 const card = data.data[0];
 
@@ -145,7 +178,7 @@ function renderizarCartas(lista){
                 img.addEventListener("click", () => mostrarImagen(img.src));
 
                 const title = document.createElement("h4");
-                title.textContent = `${count}x ${name}`;
+                title.textContent = `${count}x ${name} (${set}) ${number}`; // Simplified title
 
                 item.appendChild(img);
                 item.appendChild(title);
@@ -153,12 +186,13 @@ function renderizarCartas(lista){
 
                 totalPokemones++;
             } else {
-                console.warn(`Carta no encontrada: ${name}`);
+                console.warn(`Carta no encontrada: ${name} (${set}) ${number}`);
             }
         } catch (error) {
             console.error(`Error obteniendo carta ${name}:`, error);
         }
     });
+
     actualizarContador();
 }
 
