@@ -35,26 +35,27 @@ const favoritoGuille = [
 ];
 
 const guilleDeck = [
-    "1x (Bronzor)(Obsidian Flames)(144)",
+    "2x (Bronzor)(Obsidian Flames)(144)",
     "2x (Energy Sticker)(151)(159)",
     "11x (Basic Metal Energy)(Shrouded Fable)(99)",
     "4x (Great Ball)(Paldea Evolved)(183)",
     "2x (Nest Ball)(Sun & Moon)(123)",
     "1x (Jacq)(Scarlet & Violet)(175)",
+    "3x (Revavroom)(Scarlet & Violet)(142)",
 
-    "2x (Roark)(ParadoxRift)(173)",
+    "1x (Orthworm)(Paldea Evolved)(151)",
+    "2x (Roark/Roco)(ParadoxRift)(173)",
     "1x (Rika)(ParadoxRift)(172)",
     "1x (Zacian)(ParadoxRift)(136)",
-    
 ];
 
 
 const pokemonListTinn = [
     "tinkatuff", "tinkaton", "flapple", "hydrapple", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
-    "pidgeotto", "pidgeot", "talonflame90", "sealeo", "walrein", "braixen", "delphox",
+    "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
     "chandelure", "simisear",  "grotle",
     "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
-    "vileplume", "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "bunnelby", "dragonair", "dragonite",
+     "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "bunnelby", "dragonair", "dragonite",
     "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold",
     "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon", "Darmanitan", "Bounsweet", "Tsareena", 
     "Frogadier", "Greninja"
@@ -62,7 +63,7 @@ const pokemonListTinn = [
 
 const favoritoTinn = [
     "squirtle", "wartortle", "snivy","servine", "serperior", "mudsdale", 
-    "gossifleur", "arrokuda", "barraskewda", "jumpluff"
+    "gossifleur", "arrokuda", "barraskewda"
 ];
 
 const tinnDeck = [
