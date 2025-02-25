@@ -42,11 +42,11 @@ const guilleDeck = [
     "2x (Nest Ball)(Sun & Moon)(123)",
     "1x (Jacq)(Scarlet & Violet)(175)",
     "3x (Revavroom)(Scarlet & Violet)(142)",
-
     "1x (Orthworm)(Paldea Evolved)(151)",
-    "2x (Roark/Roco)(ParadoxRift)(173)",
-    "1x (Rika)(ParadoxRift)(172)",
-    "1x (Zacian)(ParadoxRift)(136)",
+
+    "2x (Roark)(Paradox Rift)(173)",
+    "1x (Rika)(Paradox Rift)(172)",
+    "1x (Zacian)(Paradox Rift)(136)",
 ];
 
 
@@ -85,6 +85,21 @@ const tinnDeck = [
     "4x (Ultra Ball)(Paldean Fates)(91))",
     "5x (Basic Water Energy)(Paldea Evolved)(279)"
 ];
+
+function getDeckFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("deck"); // Retorna 'guille' o 'tinn'
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const deckSeleccionado = getDeckFromURL();
+    
+    if (deckSeleccionado === "guille") {
+        mostrarCartasSimilares(guilleDeck);
+    } else if (deckSeleccionado === "tinn") {
+        mostrarCartasSimilares(tinnDeck);
+    }
+});
 
 // Función para buscar el ID de un Pokémon
 async function buscarId(nombre) {
@@ -145,10 +160,7 @@ function obtenerDetallesCarta(cardEntry) {
     const regex = /(\d+)x \((.+?)\)\((.+?)\)\((.+?)\)/;
     const match = cardEntry.match(regex);
 
-    if (!match) {
-        console.warn(`Formato incorrecto: ${cardEntry}`);
-        return null;
-    }
+    if (!match) return null;
 
     return {
         cantidad: parseInt(match[1]),
@@ -162,38 +174,38 @@ async function obtenerSetId(setName) {
     try {
         const response = await fetch("https://api.pokemontcg.io/v2/sets");
         const data = await response.json();
-        const setEncontrado = data.data.find(set => set.name.toLowerCase() === setName.toLowerCase());
+
+        const setEncontrado = data.data.find(set => 
+            set.name.toLowerCase().includes(setName.toLowerCase())
+        );
+
         return setEncontrado ? setEncontrado.id : null;
     } catch (error) {
-        console.error(`Error obteniendo ID del set ${setName}:`, error);
         return null;
     }
 }
 
 async function obtenerCarta(nombre, set, numero) {
     const setId = await obtenerSetId(set);
-    if (!setId) {
-        console.warn(`No se encontró el set ID para: ${set}`);
-        return null;
-    }
+    if (!setId) return null;
 
     const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(nombre)}" set.id:"${setId}" number:"${numero}"`;
 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
+
         return data.data.length > 0 ? data.data[0] : null;
     } catch (error) {
-        console.error(`Error obteniendo carta ${nombre}:`, error);
         return null;
     }
 }
 
-async function mostrarCartasSimilares() {
+async function mostrarCartasSimilares(deck) {
     const cartasContainer = document.getElementById("cartas-similares");
     cartasContainer.innerHTML = "";
 
-    for (const cardEntry of guilleDeck) {
+    for (const cardEntry of deck) {
         const detalles = obtenerDetallesCarta(cardEntry);
         if (!detalles) continue;
 
@@ -210,10 +222,7 @@ async function mostrarCartasSimilares() {
         cartasContainer.appendChild(div);
     }
 }
-
 mostrarCartasSimilares();
-
-
 
 // Función para actualizar el contador en la pantalla
 function actualizarContador() {
