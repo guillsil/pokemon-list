@@ -22,21 +22,20 @@ let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "tadbulb", "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar", "riolu", "metang",
-     "kingdra", "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade", "buizel",
-    "panpour", "voltorb", "budew", "charjabug", "nacli", "hydreigon", "gimmighoul", "exeggutor", "steelix", "metapod", "butterfree", 
-    "parasect", "tangrowth", "frogadier", "greninja", "wiglett", "Hihidaruma", "quagsire", "sharpedo", "masquerain",
-    "medicham"
+    "tadbulb", "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar",
+    "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade","panpour", "voltorb", "budew",
+    "charjabug", "hydreigon", "gimmighoul", "exeggutor", "steelix", "metapod", "butterfree", 
+    "parasect", "tangrowth", "frogadier", "greninja", "Hihidaruma", "quagsire", "sharpedo",
+    "medicham", "weezing", "baltoy", "Yungoos", "Larvitar",  "Tyranitar", "Pidgeot"
 ];
 const favoritoGuille = [
-    "darkrai", "bulbasaur", "ivysaur", "venusaur", , "articuno", "zapdos", "squirtle", "wartortle", "blastoise",
-     "geodude", "graveler", "golem", "koffing", "weezing", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner",
+    "darkrai", "bulbasaur", "ivysaur", "venusaur", "zapdos", "squirtle", "wartortle", "blastoise",
+     "geodude", "graveler", "golem", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner",
      "gible", "gabite", "garchomp", 
 ];
 
 const guilleDeck = [
-    "2x (Bronzong)(Obsidian Flames)(145)",
-    "2x (Bronzor)(Obsidian Flames)(144)",
+    "1x (Bronzor)(Obsidian Flames)(144)",
     "2x (Energy Sticker)(151)(159)",
     "11x (Basic Metal Energy)(Shrouded Fable)(99)",
     "4x (Great Ball)(Paldea Evolved)(183)",
@@ -51,26 +50,27 @@ const guilleDeck = [
 
 
 const pokemonListTinn = [
-    "tinkatuff", "tinkaton", "flapple", "hydrapple", "roselia", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
+    "tinkatuff", "tinkaton", "flapple", "hydrapple", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
     "pidgeotto", "pidgeot", "talonflame90", "sealeo", "walrein", "braixen", "delphox",
     "chandelure", "simisear",  "grotle",
     "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
-    "vileplume", "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "toxel", "bunnelby", "dragonair", "dragonite",
-    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold", "scizor", "scovillain", "armarouge",
-    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon"
+    "vileplume", "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "bunnelby", "dragonair", "dragonite",
+    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold",
+    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon", "Darmanitan", "Bounsweet", "Tsareena", 
+    "Frogadier", "Greninja"
 ];
 
 const favoritoTinn = [
     "squirtle", "wartortle", "snivy","servine", "serperior", "mudsdale", 
-    "gossifleur", "sobble", "arrokuda", "barraskewda", "jumpluff"
+    "gossifleur", "arrokuda", "barraskewda", "jumpluff"
 ];
 
 const tinnDeck = [
     "3x (kingdra EX)(Shrouded Fable)(12)",
-    "3x (seadra)(Shrouded Fable)(11)",
-    "3x (horsea)(Shrouded Fable)(10)",
-    "2x (frigibax)(Paldea Evolved)(58)",
-    "2x (arctibax)(Paldea Evolved)(59)",
+    "2x (seadra)(Shrouded Fable)(11)",
+    "2x (horsea)(Shrouded Fable)(10)",
+    "1x (frigibax)(Paldea Evolved)(58)",
+    "1x (arctibax)(Paldea Evolved)(59)",
     "2x (baxcalibur)(Paldea Evolved)(60)",
     "3x (Chien-Pao ex)(Paldea Evolved)(61)",
     "3x (Lapras)(Paldean Fates)(16)",
@@ -82,7 +82,7 @@ const tinnDeck = [
     "2x (Cycling Road)(151)(157)",
     "4x (Nest Ball)(Paldean Fates)(84)",
     "4x (Ultra Ball)(Paldean Fates)(91))",
-    "11x (Basic Water Energy)(Paldea Evolved)(279)"
+    "5x (Basic Water Energy)(Paldea Evolved)(279)"
 ];
 
 // Función para buscar el ID de un Pokémon
@@ -140,26 +140,12 @@ async function renderizarPokemonList(lista) {
     }
 }
 
-async function obtenerSetId(setName) {
-    try {
-        const response = await fetch("https://api.pokemontcg.io/v2/sets");
-        const data = await response.json();
-
-        const setEncontrado = data.data.find(set => set.name.toLowerCase() === setName.toLowerCase());
-        return setEncontrado ? setEncontrado.id : null;
-    } catch (error) {
-        console.error(`Error obteniendo el ID del set ${setName}:`, error);
-        return null;
-    }
-}
-
 async function renderizarCartas(lista) {
     container.innerHTML = "";
     totalPokemones = 0;
     totalSeleccionados = 0;
     actualizarContador();
 
-    // Crear los elementos sin esperar la API
     const elementosCarta = lista.map((cardEntry) => {
         const [count, cardDetails] = cardEntry.split("x ");
         const detailsString = cardDetails.trim();
@@ -182,6 +168,7 @@ async function renderizarCartas(lista) {
         const img = document.createElement("img");
         img.src = "loading.gif"; // Imagen temporal mientras carga
         img.alt = name;
+        img.addEventListener("click", () => mostrarImagen(img.src));
 
         const title = document.createElement("h4");
         title.textContent = `${count}x ${name} (${set}) ${number}`;
@@ -193,17 +180,10 @@ async function renderizarCartas(lista) {
         return { item, img, name, set, number };
     });
 
-    // Ahora hacer las solicitudes fetch en paralelo
-    const cardPromises = elementosCarta.map(async ({ item, img, name, set, number }) => {
-        if (!item) return;
+    const cardPromises = elementosCarta.map(async ({ img, name, set, number }) => {
+        if (!img) return;
 
-        const setId = await obtenerSetId(set);
-        if (!setId) {
-            console.warn(`No se encontró el ID del set para: ${set}`);
-            return;
-        }
-
-        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(name)}" set.id:"${setId}" number:"${number}"`;
+        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(name)}" set.name:"${encodeURIComponent(set)}" number:"${number}"`;
 
         try {
             const response = await fetch(apiUrl);
@@ -225,6 +205,7 @@ async function renderizarCartas(lista) {
     await Promise.all(cardPromises);
     actualizarContador();
 }
+
 
 
 // Función para actualizar el contador en la pantalla
