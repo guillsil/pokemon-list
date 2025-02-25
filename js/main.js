@@ -141,71 +141,77 @@ async function renderizarPokemonList(lista) {
     }
 }
 
-async function renderizarCartas(lista) {
-    container.innerHTML = "";
-    totalPokemones = 0;
-    totalSeleccionados = 0;
-    actualizarContador();
+function obtenerDetallesCarta(cardEntry) {
+    const regex = /(\d+)x \((.+?)\)\((.+?)\)\((.+?)\)/;
+    const match = cardEntry.match(regex);
 
-    const elementosCarta = lista.map((cardEntry) => {
-        const [count, cardDetails] = cardEntry.split("x ");
-        const detailsString = cardDetails.trim();
-        const regex = /\((.+?)\)\((.+?)\)\((.+?)\)/;
-        const match = detailsString.match(regex);
+    if (!match) {
+        console.warn(`Formato incorrecto: ${cardEntry}`);
+        return null;
+    }
 
-        if (!match) {
-            console.warn(`Formato de carta incorrecto: ${detailsString}`);
-            return null;
-        }
-
-        const name = match[1].trim();
-        const set = match[2].trim();
-        const number = match[3].trim();
-
-        // Crear un contenedor de carta antes de la carga
-        const item = document.createElement("div");
-        item.classList.add("pokemon-item");
-
-        const img = document.createElement("img");
-        img.src = "loading.gif"; // Imagen temporal mientras carga
-        img.alt = name;
-        img.addEventListener("click", () => mostrarImagen(img.src));
-
-        const title = document.createElement("h4");
-        title.textContent = `${count}x ${name} (${set}) ${number}`;
-
-        item.appendChild(img);
-        item.appendChild(title);
-        container.appendChild(item);
-
-        return { item, img, name, set, number };
-    });
-
-    const cardPromises = elementosCarta.map(async ({ img, name, set, number }) => {
-        if (!img) return;
-
-        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(name)}" set.name:"${encodeURIComponent(set)}" number:"${number}"`;
-
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            if (data?.data?.length > 0) {
-                const card = data.data[0];
-                img.src = card.images.large; // Reemplazar la imagen cuando se cargue
-            } else {
-                console.warn(`Carta no encontrada: ${name} (${set}) ${number}`);
-                img.src = "not_found.png"; // Imagen de "no encontrado"
-            }
-        } catch (error) {
-            console.error(`Error obteniendo carta ${name}:`, error);
-            img.src = "error.png"; // Imagen de error
-        }
-    });
-
-    await Promise.all(cardPromises);
-    actualizarContador();
+    return {
+        cantidad: parseInt(match[1]),
+        nombre: match[2],
+        set: match[3],
+        numero: match[4]
+    };
 }
+
+async function obtenerSetId(setName) {
+    try {
+        const response = await fetch("https://api.pokemontcg.io/v2/sets");
+        const data = await response.json();
+        const setEncontrado = data.data.find(set => set.name.toLowerCase() === setName.toLowerCase());
+        return setEncontrado ? setEncontrado.id : null;
+    } catch (error) {
+        console.error(`Error obteniendo ID del set ${setName}:`, error);
+        return null;
+    }
+}
+
+async function obtenerCarta(nombre, set, numero) {
+    const setId = await obtenerSetId(set);
+    if (!setId) {
+        console.warn(`No se encontró el set ID para: ${set}`);
+        return null;
+    }
+
+    const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(nombre)}" set.id:"${setId}" number:"${numero}"`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.data.length > 0 ? data.data[0] : null;
+    } catch (error) {
+        console.error(`Error obteniendo carta ${nombre}:`, error);
+        return null;
+    }
+}
+
+async function mostrarCartasSimilares() {
+    const cartasContainer = document.getElementById("cartas-similares");
+    cartasContainer.innerHTML = "";
+
+    for (const cardEntry of guilleDeck) {
+        const detalles = obtenerDetallesCarta(cardEntry);
+        if (!detalles) continue;
+
+        const carta = await obtenerCarta(detalles.nombre, detalles.set, detalles.numero);
+        if (!carta) continue;
+
+        const div = document.createElement("div");
+        div.classList.add("carta");
+        div.innerHTML = `
+            <img src="${carta.images.large}" alt="${carta.name}">
+            <p>${detalles.cantidad}x ${carta.name} (${detalles.set})</p>
+        `;
+
+        cartasContainer.appendChild(div);
+    }
+}
+
+mostrarCartasSimilares();
 
 
 

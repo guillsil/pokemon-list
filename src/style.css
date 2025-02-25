@@ -243,3 +243,47 @@ form select:disabled {
         text-align: center;
     }
 }
+
+.cartas-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.carta {
+    flex: 1 1 calc(20% - 10px); /* 5 cartas por fila en pantallas grandes */
+    max-width: calc(20% - 10px);
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+}
+.carta img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Ajustes para pantallas medianas (máx. 3 cartas por fila) */
+@media (max-width: 1024px) {
+    .carta {
+        flex: 1 1 calc(33.33% - 10px);
+        max-width: calc(33.33% - 10px);
+    }
+}
+
+/* Ajustes para pantallas pequeñas (máx. 2 cartas por fila) */
+@media (max-width: 768px) {
+    .carta {
+        flex: 1 1 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+}
+
+/* Ajustes para móviles muy pequeños (1 carta por fila) */
+@media (max-width: 480px) {
+    .carta {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}

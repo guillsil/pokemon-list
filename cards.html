@@ -5,71 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartas Similares</title>
     <link rel="stylesheet" href="src/style.css">
-    <style>
-        .cartas-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .carta {
-            width: 150px;
-            text-align: center;
-        }
-        .carta img {
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
     <nav>
-        <h1 id="titulo-principal" >LP</h1>
+        <h1 id="titulo-principal">LP</h1>
         <div class="btn-nav">
-            <button  id="guille-btn">Lista Andres</button>
-            <button  id="tinn-btn">Lista Martin</button>
-            <button  id="fav-guille">👾 Andres</button>
-            <button  id="fav-tinn">🤍 Martin</button>
-            <button  id="deck-guille">🦁 Deck G</button>
-            <button  id="deck-tinn">🐦‍🔥 Deck T</button>
-            <a href="cards.html"><button>GS</button></a>
-            
+            <a href="index.html"><Button>Regresar</Button></a>
+            <a href="cards.html"><button>🦁 Deck G</button></a>
         </div>
     </nav>
-    <h2>Cartas Similares</h2>
     <div id="cartas-similares" class="cartas-container"></div>
-
-    <script>
-        async function obtenerCartasSimilares(nombre) {
-            const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${encodeURIComponent(nombre)}"`;
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                return data.data;
-            } catch (error) {
-                console.error("Error obteniendo cartas:", error);
-                return [];
-            }
-        }
-
-        async function mostrarCartasSimilares() {
-            const cartasContainer = document.getElementById("cartas-similares");
-            const nombresCartas = ["Bulbasaur", "Charmander", "Squirtle"]; // Puedes agregar más
-
-            for (const nombre of nombresCartas) {
-                const cartas = await obtenerCartasSimilares(nombre);
-                cartas.slice(0, 3).forEach(carta => { // Mostrar solo 3 por carta base
-                    const div = document.createElement("div");
-                    div.classList.add("carta");
-                    div.innerHTML = `
-                        <img src="${carta.images.large}" alt="${carta.name}">
-                        <p>${carta.name}</p>
-                    `;
-                    cartasContainer.appendChild(div);
-                });
-            }
-        }
-
-        mostrarCartasSimilares();
-    </script>
-
+    <script src="/js/main.js"></script>
 </body>
 </html>
