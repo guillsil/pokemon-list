@@ -84,7 +84,7 @@ const pokemonListTinn = [
     "1x (Arboliva)(Obsidian Flames)(21)",  
     "1x (Bellossom)(Obsidian Flames)(3)",  
     "1x (Blitzle)(Paradox Rift)(62)", 
-    "1x (Bunnelby)(Obsidian Flames)(112)", 
+    "1x (Bunnelby)(Obsidian Flames)(175)", 
     "1x (Capsakid)(Obsidian Flames)(24)",  
     "1x (Chandelure)(Obsidian Flames)(38)",  
     "1x (Chandelure)(Twilight Masquerade)(38)",
