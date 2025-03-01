@@ -49,10 +49,25 @@ const pokemonListGuille = [
     "1x (Machop)(151)(66)",
     "1x (Machoke)(151)(67)",  
 ];
+
 const favoritoGuille = [
-    "darkrai", "bulbasaur", "ivysaur", "venusaur", "zapdos", "squirtle", "wartortle", "blastoise",
-     "geodude", "graveler", "golem", "kangaskhan", "celebi", "snivy", "servine", "serperior", "stonjourner",
-     "gible", "gabite", "garchomp", 
+    "1x (darkrai)(Obsidian Flames)(136)",
+    "1x (bulbasaur)(151)(1)",  
+    "1x (ivysaur)(151)(2)",  
+    "1x (Venusaur ex)(151)(3)",  
+    "1x (zapdos)(151)(145)",  
+    "1x (squirtle)(151)(7)",  
+    "1x (wartortle)(151)(8)",  
+    "1x (blastoise ex)(151)(9)",  
+    "1x (geodude)(151)(74)", 
+    "1x (Graveler)(151)(75)", 
+    "1x (golem ex)(151)(76)",  
+    "1x (kangaskhan)(Obsidian Flames)(165)", 
+    "1x (celebi)(Stellar Crown)(4)", 
+    "1x (stonjourner)(Scarlet & Violet)(121)",
+    "1x (gible)(Paradox Rift)(94)",
+    "1x (gabite)(Paradox Rift)(95)",
+    "1x (garchomp ex)(Paradox Rift)(38)",
 ];
 
 const guilleDeck = [
@@ -72,14 +87,7 @@ const guilleDeck = [
 
 
 const pokemonListTinn = [
-    "tinkatuff", "tinkaton", "flapple", "hydrapple", "budew", "deerling", "thwackey",  "drakloak", "dragapult", 
-    "pidgeotto", "pidgeot", "talonflame", "sealeo", "walrein", "braixen", "delphox",
-    "chandelure", "simisear",  "grotle",
-    "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
-     "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "bunnelby", "dragonair", "dragonite",
-     "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold",
-    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon", "Darmanitan", "Tsareena", 
-    "Frogadier", "Greninja"
+    
 ];
 
 const favoritoTinn = [
