@@ -22,11 +22,32 @@ let totalSeleccionados = 0;
 let totalPokemones = 0;
 
 const pokemonListGuille = [
-    "tadbulb", "abra", "alakazam", "dragonair", "dragonite","charmeleon", "eevee", "gengar",
-    "persian","weepinbell", "victreebel", "gardevoir", "gallade", "doublade","panpour", "voltorb", "budew",
-    "charjabug", "hydreigon", "gimmighoul", "exeggutor", "steelix", "metapod", "butterfree", 
-    "parasect", "tangrowth", "frogadier", "greninja", "Hihidaruma", "quagsire", "sharpedo",
-    "medicham", "weezing", "baltoy", "Yungoos", "Larvitar",  "Tyranitar", "Pidgeot"
+    "1x (abra)(151)(63)",
+    "1x (Alakazam ex)(151)(65)",
+    "1x (charmeleon)(Obsidian Flames)(27)",
+    "1x (eevee)(Prismatic Evolutions)(74)",
+    "1x (gengar)(Temporal Forces)(193)",
+    "1x (persian)(151)(53)",
+    "1x (weepinbell)(151)(70)",
+    "1x (victreebel)(151)(71)",
+    "1x (gardevoir)(Paldean Fates)(29)",
+    "1x (doublade)(Paradox Rift)(132)",
+    "1x (voltorb)(151)(100)",
+    "1x (charjabug)(Stellar Crown)(52)",
+    "1x (Hydreigon ex)(Surging Sparks)(119)",
+    "1x (steelix)(Paradox Rift)(125)",
+    "1x (metapod)(151)(11)",
+    "1x (butterfree)(151)(12)",
+    "1x (parasect)(151)(47)",
+    "1x (frogadier)(Obsidian Flames)(57)",
+    "1x (Sharpedo)(Obsidian Flames)(47)",
+    "1x (weezing)(151)(110)",
+    "1x (Yungoos)(Obsidian Flames)(176)",
+    "1x (Larvitar)(Obsidian Flames)(105)",
+    "1x (Tyranitar Ex)(Obsidian Flames)(66)",
+    "1x (Pidgeot Ex)(Obsidian Flames)(164)",
+    "1x (Machop)(151)(66)",
+    "1x (Machoke)(151)(67)",  
 ];
 const favoritoGuille = [
     "darkrai", "bulbasaur", "ivysaur", "venusaur", "zapdos", "squirtle", "wartortle", "blastoise",
@@ -56,8 +77,8 @@ const pokemonListTinn = [
     "chandelure", "simisear",  "grotle",
     "torterra", "amoonguss", "rowlet", "beautifly", "gogoat", "gloom",
      "bellossom", "dolliv", "arboliva", "charmeleon", "charizard", "bunnelby", "dragonair", "dragonite",
-    "vivillon", "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold",
-    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon", "Darmanitan", "Bounsweet", "Tsareena", 
+     "toedscool", "sandile", "primeape", "annihilape", "tandemaus", "maushold",
+    "ceruledge", "pawmi", "pawmo", "eelektrik", "melmetal", "zigzagoon", "Darmanitan", "Tsareena", 
     "Frogadier", "Greninja"
 ];
 
@@ -101,61 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Función para buscar el ID de un Pokémon
-async function buscarId(nombre) {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre.toLowerCase()}`); // Convertimos a minúsculas para evitar errores
-    const data = await response.json();
-    return data.id;
-}
 
-// Función para renderizar la lista de Pokémon
-async function renderizarPokemonList(lista) {
-    container.innerHTML = ""; // Limpiar el contenedor antes de renderizar
-    totalPokemones = lista.length; // Guardar el total de cartas
-    totalSeleccionados = 0; // Reiniciar contador de seleccionados
-    actualizarContador(); // Actualizar la UI con los valores actuales
 
-    for (const pokemon of lista) {
-        try {
-            const id = await buscarId(pokemon);
-            const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
-            const item = document.createElement("div");
-            item.classList.add("pokemon-item");
-
-            const img = document.createElement("img");
-            img.src = imgUrl;
-            img.alt = pokemon;
-            img.addEventListener("click", () => mostrarImagen(imgUrl));
-
-            const name = document.createElement("span");
-            name.textContent = pokemon;
-
-            const form = document.createElement("form");
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-
-            // Evento para actualizar contador cuando se selecciona un Pokémon
-            checkbox.addEventListener("change", () => {
-                if (checkbox.checked) {
-                    totalSeleccionados++;
-                } else {
-                    totalSeleccionados--;
-                }
-                actualizarContador();
-            });
-
-            form.appendChild(checkbox);
-            item.appendChild(img);
-            item.appendChild(name);
-            item.appendChild(form);
-            container.appendChild(item);
-        } catch (error) {
-            console.error(`Error obteniendo datos de ${pokemon}:`, error);
-        }
-    }
-}
-
+// Extraer detalles de la carta en el nuevo formato
 function obtenerDetallesCarta(cardEntry) {
     const regex = /(\d+)x \((.+?)\)\((.+?)\)\((.+?)\)/;
     const match = cardEntry.match(regex);
@@ -169,6 +138,63 @@ function obtenerDetallesCarta(cardEntry) {
         numero: match[4]
     };
 }
+
+// Obtener la imagen de la carta desde la API
+async function obtenerImagenCarta(detalles) {
+    const setId = await obtenerSetId(detalles.set);
+    if (!setId) return null;
+
+    const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:\"${encodeURIComponent(detalles.nombre)}\" set.id:\"${setId}\" number:\"${detalles.numero}\"`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.data.length > 0 ? data.data[0].images.large : null;
+    } catch (error) {
+        console.error(`Error obteniendo imagen de ${detalles.nombre}:`, error);
+        return null;
+    }
+}
+
+// Renderizar la lista de Pokémon con el nuevo formato
+async function renderizarPokemonList(lista) {
+    container.innerHTML = "";
+    totalPokemones = lista.length;
+    totalSeleccionados = 0;
+    actualizarContador();
+
+    for (const cardEntry of lista) {
+        const detalles = obtenerDetallesCarta(cardEntry);
+        if (!detalles) continue;
+
+        const imgUrl = await obtenerImagenCarta(detalles);
+        const item = document.createElement("div");
+        item.classList.add("pokemon-item");
+
+        const img = document.createElement("img");
+        img.src = imgUrl || "placeholder.jpg";
+        img.alt = detalles.nombre;
+        img.addEventListener("click", () => mostrarImagen(imgUrl));
+
+        const name = document.createElement("span");
+        name.textContent = `${detalles.cantidad}x ${detalles.nombre} (${detalles.set})`;
+
+        const form = document.createElement("form");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.addEventListener("change", () => {
+            totalSeleccionados += checkbox.checked ? 1 : -1;
+            actualizarContador();
+        });
+
+        form.appendChild(checkbox);
+        item.appendChild(img);
+        item.appendChild(name);
+        item.appendChild(form);
+        container.appendChild(item);
+    }
+}
+
 
 async function obtenerSetId(setName) {
     try {
@@ -222,7 +248,7 @@ async function mostrarCartasSimilares(deck) {
         cartasContainer.appendChild(div);
     }
 }
-mostrarCartasSimilares();
+
 
 // Función para actualizar el contador en la pantalla
 function actualizarContador() {
@@ -256,14 +282,16 @@ favTinn.addEventListener("click", () => {
     renderizarPokemonList(favoritoTinn)
 });
 
-deckGuille.addEventListener("click", async () => {
-    await renderizarCartas(guilleDeck); // Asegura que se espere la ejecución
-});
+if (guilleBtn) {
+    guilleBtn.addEventListener("click", () => {
+        renderizarPokemonList(pokemonListGuille);
+    });
+}
 
-deckTinn.addEventListener("click", async () => {
-    await renderizarCartas(tinnDeck)
-});
+if (deckTinn) {
+    deckTinn.addEventListener("click", () => {
+        renderizarCartas(tinnDeck)
+    });
+}
 
-
-// Renderizar la lista de Guille por defecto al cargar la página
 renderizarPokemonList(pokemonListGuille);
