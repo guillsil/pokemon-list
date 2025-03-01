@@ -1,8 +1,6 @@
 const container = document.getElementById("pokemon-list");
 const guilleBtn = document.getElementById("guille-btn");
 const tinnBtn = document.getElementById("tinn-btn");
-const favGuille = document.getElementById("fav-guille");
-const favTinn = document.getElementById("fav-tinn");
 const deckGuille = document.getElementById("deck-guille");
 const deckTinn = document.getElementById("deck-tinn");
 const cantidadSeleccionados = document.querySelector(".contador h3"); 
@@ -47,10 +45,7 @@ const pokemonListGuille = [
     "1x (Tyranitar Ex)(Obsidian Flames)(66)",
     "1x (Pidgeot Ex)(Obsidian Flames)(164)",
     "1x (Machop)(151)(66)",
-    "1x (Machoke)(151)(67)",  
-];
-
-const favoritoGuille = [
+    "1x (Machoke)(151)(67)",
     "1x (darkrai)(Obsidian Flames)(136)",
     "1x (bulbasaur)(151)(1)",  
     "1x (ivysaur)(151)(2)",  
@@ -67,8 +62,9 @@ const favoritoGuille = [
     "1x (stonjourner)(Scarlet & Violet)(121)",
     "1x (gible)(Paradox Rift)(94)",
     "1x (gabite)(Paradox Rift)(95)",
-    "1x (garchomp ex)(Paradox Rift)(38)",
+    "1x (garchomp ex)(Paradox Rift)(38)", 
 ];
+
 
 const guilleDeck = [
     "2x (Bronzor)(Obsidian Flames)(144)",
@@ -79,7 +75,6 @@ const guilleDeck = [
     "1x (Jacq)(Scarlet & Violet)(175)",
     "3x (Revavroom)(Scarlet & Violet)(142)",
     "1x (Orthworm)(Paldea Evolved)(151)",
-
     "2x (Roark)(Paradox Rift)(173)",
     "1x (Rika)(Paradox Rift)(172)",
     "1x (Zacian)(Paradox Rift)(136)",
@@ -87,13 +82,59 @@ const guilleDeck = [
 
 
 const pokemonListTinn = [
+    "1x (Amoonguss)(Obsidian Flames)(10)", 
+    "1x (Applin)(Twilight Masquerade)(17)",
+    "1x (Arboliva)(Obsidian Flames)(21)",  
+    "1x (Bellossom)(Obsidian Flames)(3)",  
+    "1x (Blitzle)(Paradox Rift)(62)", 
+    "1x (Bunnelby)(Obsidian Flames)(112)", 
+    "1x (Capsakid)(Obsidian Flames)(24)",  
+    "1x (Chandelure)(Obsidian Flames)(38)",  
+    "1x (Chandelure)(Twilight Masquerade)(38)",
+    "1x (Crabominable)(Obsidian Flames)(115)",
+    "1x (Cufant)(Shrouded Fable)(43)",,  
+    "1x (Darmanitan)(Obsidian Flames)(35)", 
+    "1x (Deerling)(Temporal Forces)(16)",  
+    "1x (Dolliv)(Obsidian Flames)(20) ", 
+    "1x (Donphan)(Shrouded Fable)(103)",  
+    "1x (Dottler)(Obsidian Flames)(12)",  
+    "1x (Drilbur)(Obsidian Flames)(111)",  
+    "1x (Eelektrik)(Obsidian Flames)(68)",  
+    "1x (Eevee)(Obsidian Flames)(166)",  
+    "1x (Floette)(Twilight Masquerade)(87)",  
+    "1x (Florges)(Twilight Masquerade)(88)",  
+    "1x (Frogadier)(Obsidian Flames)(57)",  
+    "1x (Gloom)(Obsidian Flames)(2)",  
+    "1x (Gogoat)(Scarlet & Violet)(12)",  
+    "1x (Grotle)(Temporal Forces)(11)",  
+    "1x (Krookodile)(Scarlet & Violet)(117)",  
+    "1x (Lampent)(Obsidian Flames)(37)",  
+    "1x (Litwick)(Twilight Masquerade)(36)",  
+    "1x (Melmetal)(Obsidian Flames)(153)",  
+    "1x (Mudsdale)(Temporal Forces)(92)",  
+    "1x (Ninetales)(Obsidian Flames)(29)",  
+    "1x (Persian)(Shrouded Fable)(49)",  
+    "1x (Primeape)(Scarlet & Violet)(108)",  
+    "1x (Rowlet)(Obsidian Flames)(13)",  
+    "1x (Sandaconda)(Scarlet & Violet)(120)",  
+    "1x (Sandile)(Scarlet & Violet)(115)",  
+    "1x (Sharpedo)(Obsidian Flames)(47)",  
+    "1x (Simisear)(Obsidian Flames)(21)",  
+    "1x (Talonflame)(Paldea Evolved)(30)",  
+    "1x (Tandemaus)(Scarlet & Violet)(160)",  
+    "1x (Togepi)(Obsidian Flames)(83)",  
+    "1x (Togetic)(Obsidian Flames)(84)",  
+    "1x (Toedscool)(Obsidian Flames)(25)",  
+    "1x (Torterra ex)(Temporal Forces)(12)",  
+    "1x (Tsareena)(Obsidian Flames)(18)",  
+    "1x (Thwackey)(Twilight Masquerade)(15)",  
+    "1x (Zebstrika)(Shrouded Fable)(63)",  
+    "1x (Zigzagoon)(Obsidian Flames)(167)"
+
     
 ];
 
-const favoritoTinn = [
-    "squirtle", "wartortle", "snivy","servine", "serperior", "mudsdale", 
-    "gossifleur", "arrokuda", "barraskewda"
-];
+
 
 const tinnDeck = [
     "3x (kingdra EX)(Shrouded Fable)(12)",
@@ -238,7 +279,8 @@ async function obtenerCarta(nombre, set, numero) {
 async function mostrarCartasSimilares(deck) {
     const cartasContainer = document.getElementById("cartas-similares");
     cartasContainer.innerHTML = "";
-
+    const favGuille = document.getElementById("fav-guille");
+    const favTinn = document.getElementById("fav-tinn");
     for (const cardEntry of deck) {
         const detalles = obtenerDetallesCarta(cardEntry);
         if (!detalles) continue;
@@ -282,13 +324,6 @@ tinnBtn.addEventListener("click", () => {
     renderizarPokemonList(pokemonListTinn);
 });
 
-favGuille.addEventListener("click", () => {
-    renderizarPokemonList(favoritoGuille)
-});
-
-favTinn.addEventListener("click", () => {
-    renderizarPokemonList(favoritoTinn)
-});
 
 if (guilleBtn) {
     guilleBtn.addEventListener("click", () => {
