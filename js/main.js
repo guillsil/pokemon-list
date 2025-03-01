@@ -72,12 +72,9 @@ const guilleDeck = [
     "11x (Basic Metal Energy)(Shrouded Fable)(99)",
     "4x (Great Ball)(Paldea Evolved)(183)",
     "2x (Nest Ball)(Sun & Moon)(123)",
-    "1x (Jacq)(Scarlet & Violet)(175)",
     "3x (Revavroom)(Scarlet & Violet)(142)",
-    "1x (Orthworm)(Paldea Evolved)(151)",
     "2x (Roark)(Paradox Rift)(173)",
-    "1x (Rika)(Paradox Rift)(172)",
-    "1x (Zacian)(Paradox Rift)(136)",
+    "2x (Zacian)(Paradox Rift)(136)",
 ];
 
 
@@ -299,7 +296,6 @@ async function mostrarCartasSimilares(deck) {
     }
 }
 
-
 // Función para actualizar el contador en la pantalla
 function actualizarContador() {
     cantidadSeleccionados.textContent = `Cantidad de Pokemones Seleccionados: ${totalSeleccionados}`;
@@ -337,4 +333,4 @@ if (deckTinn) {
     });
 }
 
-renderizarPokemonList(pokemonListGuille);
+
