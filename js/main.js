@@ -2,6 +2,7 @@ const container = document.getElementById("pokemon-list");
 const guilleBtn = document.getElementById("guille-btn");
 const tinnBtn = document.getElementById("tinn-btn");
 const deckGuille = document.getElementById("deck-guille");
+const deckGuilleMoon = document.getElementById("deck-guille-moon");
 const deckTinn = document.getElementById("deck-tinn");
 const cantidadSeleccionados = document.querySelector(".contador h3");
 const totalCartas = document.querySelector(".contador h4");
@@ -40,6 +41,24 @@ const decks = {
         "4x (Ultra Ball)(Paldean Fates)(91)",
         "5x (Basic Water Energy)(Paldea Evolved)(279)"
     ],
+    deckMoon: [
+        "1x (Roaring Moon)(Temporal Forces)(109)",
+        "2x (Roaring Moon ex)(Paradox Rift)(124)",
+        "3x (Flutter Mane)(Temporal Forces)(78)",
+        "1x (Koraidon)(Surging Sparks)(116)",
+        "2x (Ancient Booster Energy Capsule)(Paradox Rift)(159)",
+        "1x (Boss’s Orders)(Paldea Envolved)(172)",
+        "2x (Counter Catcher)(Paradox Rift)(160)",
+        "2x (Explorer's Guidance)(Prismatic Evolutions)(107)",
+        "4x (Nest Ball)(Scarlet & Violet)(181)",
+        "2x (Night Stretcher)(Shrouded Fable)(61)",
+        "1x (Pal Pad)(Scarlet & Violet)(182)",
+        "1x (Artazon)(Paldea Fates)(76)",
+        "3x (Pokégear 3,0)(Scarlet & Violet)(186)",
+        "1x (Super Rod)()()",
+        "1x (Superior Energy Retrieval)()()",
+        "3x (Ultra Ball)()()",
+    ]
 };
 
 const pokemonLists = {
@@ -240,4 +259,5 @@ if (guilleBtn) guilleBtn.addEventListener("click", () => renderizarPokemonList(p
 if (tinnBtn) tinnBtn.addEventListener("click", () => renderizarPokemonList(pokemonLists.tinn));
 if (deckGuille) deckGuille.addEventListener("click", () => renderizarPokemonList(decks.guille));
 if (deckTinn) deckTinn.addEventListener("click", () => renderizarPokemonList(decks.tinn));
+if (deckGuilleMoon) deckGuilleMoon.addEventListener("click", () => renderizarPokemonList(decks.deckMoon))
 
