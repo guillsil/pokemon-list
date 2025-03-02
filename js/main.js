@@ -13,13 +13,12 @@ let totalPokemones = 0;
 // Todas las listas de cartas y decks
 const decks = {
     guille: [
-        "2x (Bronzor)(Obsidian Flames)(144)",
-        "2x (Energy Sticker)(151)(159)",
-        "11x (Basic Metal Energy)(Shrouded Fable)(99)",
+        "1x (Energy Sticker)(151)(159)",
+        "4x (Basic Metal Energy)(Shrouded Fable)(99)",
         "4x (Great Ball)(Paldea Evolved)(183)",
         "2x (Nest Ball)(Sun & Moon)(123)",
-        "3x (Revavroom)(Scarlet & Violet)(142)",
-        "2x (Roark)(Paradox Rift)(173)",
+        "2x (Revavroom)(Scarlet & Violet)(142)",
+        "1x (Roark)(Paradox Rift)(173)",
         "2x (Zacian)(Paradox Rift)(136)",
     ],
     tinn: [
